@@ -54,7 +54,7 @@ router.put('/:id', (req, res) => {
     const project = req.body;
 
     projectModel.update(id, project)
-    .then( count => {
+    .then(count => {
         if (count) {
             res.status(200).json({ message: `${count} project(s) updated`});
         } else {
@@ -66,5 +66,21 @@ router.put('/:id', (req, res) => {
     })
 })
 
+//DELETE project '/api/projects/:id'
+router.delete('/:id', (req, res) => {
+    const { id } = req.params;
+
+    projectModel.remove(id)
+    .then(count => {
+        if (count) {
+            res.status(200).json({ message: `${count} project(s) deleted`})
+        } else {
+            res.status(404).json({ message: 'project does not exist'})
+        }
+    })
+    .catch (error => {
+        res.status(500).json ({ message: error})
+    })
+})
 
 module.exports = router;
