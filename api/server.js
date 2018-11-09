@@ -1,10 +1,10 @@
 const express = require('express');
 
-//==== ADD middleware
+const configureMiddleware = require('../config/middleware')
 
 const server = express();
 
-//==== ADD middleware(server)
+configureMiddleware(server);
 
 server.get('/', (req, res) => {
     res.status(200).json({api: 'running'})
