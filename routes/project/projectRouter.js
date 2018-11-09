@@ -33,4 +33,18 @@ router.get('/:id', (req, res) => {
     })
 })
 
+//POST (create) new project '/api/projects'
+router.post('/', (req, res) => {
+    projectModel.insert({
+        name: req.body.name,
+        description: req.body.description
+    })
+    .then(newProject => {
+        res.status(201).json(newProject);
+    })
+    .catch(error => {
+        res.status(500).json({ message: error})
+    })
+})
+
 module.exports = router;
